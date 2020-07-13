@@ -1,3 +1,8 @@
+"""
+pytorch                   1.5.1
+torchvision               0.6.1
+"""
+
 from __future__ import print_function
 import argparse
 import torch
@@ -136,5 +141,7 @@ if __name__ == '__main__':
         print('No available GPU instance!')
         sys.exit(0)
     
+    _ = datasets.MNIST('./data', train=True, download=True) # download dataset in this example
+
     # Recommend use `spawn` to initialise DDP on GPUs to avoid issue when multiprocesses(e.g. dataloader) in a forked process
     p = spawn(fn=init_process, args=(world_size, run, pyargs, 'nccl'), nprocs=world_size, join=True)
